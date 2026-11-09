@@ -1,132 +1,134 @@
-# Dofus Retro Switcher pour macOS
+[🇫🇷 Français](README.fr.md) | 🇬🇧 English
 
-Passe d'un compte à l'autre en un raccourci quand tu joues à **Dofus Retro en multi-compte sur Mac**, comme les organizers sur Windows.
+# Dofus Retro Switcher for macOS
 
-Basé sur [Hammerspoon](https://www.hammerspoon.org/), un outil gratuit et open source d'automatisation pour macOS.
+Switch between accounts with a single shortcut when playing **Dofus Retro with multiple accounts on Mac**, just like the organizers on Windows.
+
+Built on [Hammerspoon](https://www.hammerspoon.org/), a free and open-source automation tool for macOS.
 
 ---
 
-## Fonctionnalités
+## Features
 
-| Raccourci | Action |
+| Shortcut | Action |
 |---|---|
-| `⌥ Option` + `Tab` | Compte suivant |
-| `⌥ Option` + `⇧ Shift` + `Tab` | Compte précédent |
-| `⌥ Option` + `1` à `8` | Accès direct au compte n°X |
-| Bouton latéral souris (avant) | Compte suivant |
-| Bouton latéral souris (arrière) | Compte précédent |
-| `⌥ Option` + `D` | Debug : liste les fenêtres ouvertes |
+| `⌥ Option` + `Tab` | Next account |
+| `⌥ Option` + `⇧ Shift` + `Tab` | Previous account |
+| `⌥ Option` + `1` to `8` | Jump directly to account #X |
+| Mouse side button (forward) | Next account |
+| Mouse side button (back) | Previous account |
+| `⌥ Option` + `D` | Debug: list open windows |
 
-Un petit popup affiche le nom du personnage actif à chaque changement.
+A small popup shows the active character's name on each switch.
 
-> 💡 La touche **Alt** sur Mac, c'est **⌥ Option** (entre `Ctrl` et `Cmd`).
+> 💡 The **Alt** key on Mac is **⌥ Option** (between `Ctrl` and `Cmd`).
 
 ---
 
 ## Installation
 
-### 1. Installer Homebrew
+### 1. Install Homebrew
 
-Homebrew est un gestionnaire de paquets pour macOS. Ouvre le **Terminal** (`Cmd + Espace`, puis tape « Terminal ») et colle :
+Homebrew is a package manager for macOS. Open **Terminal** (`Cmd + Space`, then type "Terminal") and paste:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Suis les instructions : ton mot de passe de session sera demandé. Les caractères ne s'affichent pas pendant la saisie, c'est normal.
+Follow the instructions. Your session password will be requested; characters don't show while typing, that's normal.
 
-**Sur Mac Apple Silicon (M1, M2, M3, M4…)**, ajoute ensuite Homebrew au PATH :
+**On Apple Silicon Macs (M1, M2, M3, M4…)**, then add Homebrew to your PATH:
 
 ```bash
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-Vérifie que ça marche :
+Check that it works:
 
 ```bash
 brew --version
 ```
 
-### 2. Installer Hammerspoon
+### 2. Install Hammerspoon
 
 ```bash
 brew install --cask hammerspoon
 ```
 
-> Sans Homebrew : télécharge le `.zip` sur [hammerspoon.org](https://www.hammerspoon.org/), dézippe-le et glisse **Hammerspoon.app** dans **Applications**.
+> Without Homebrew: download the `.zip` from [hammerspoon.org](https://www.hammerspoon.org/), unzip it and drag **Hammerspoon.app** into **Applications**.
 
-### 3. Lancer Hammerspoon et autoriser l'Accessibilité
+### 3. Launch Hammerspoon and allow Accessibility
 
-1. Ouvre **Hammerspoon** depuis Applications. Si macOS bloque l'ouverture : clic droit, puis **Ouvrir**.
-2. Va dans **Réglages Système** > **Confidentialité et sécurité** > **Accessibilité**.
-3. Active **Hammerspoon**.
+1. Open **Hammerspoon** from Applications. If macOS blocks it: right-click, then **Open**.
+2. Go to **System Settings** > **Privacy & Security** > **Accessibility**.
+3. Enable **Hammerspoon**.
 
-### 4. Installer le script
+### 4. Install the script
 
-Dans le Terminal :
+In Terminal:
 
 ```bash
 mkdir -p ~/.hammerspoon
 curl -o ~/.hammerspoon/init.lua https://raw.githubusercontent.com/Thelemas/DofusRetroSwitcherMac/main/DofusRetroSwitcherMac.lua
 ```
 
-> Le script `DofusRetroSwitcherMac.lua` est enregistré sous le nom `init.lua`, le seul fichier que Hammerspoon charge au démarrage.
+> The `DofusRetroSwitcherMac.lua` script is saved as `init.lua`, the only file Hammerspoon loads at startup.
 
-> ⚠️ Si tu as déjà un `init.lua` Hammerspoon, cette commande l'écrase. Fais une sauvegarde avant, ou ajoute le contenu du script à ton fichier existant.
+> ⚠️ If you already have a Hammerspoon `init.lua`, this command will overwrite it. Back it up first, or add the script's content to your existing file.
 
-Ensuite, clique sur l'icône **Hammerspoon** dans la barre de menu, puis sur **Reload Config**.
-Le message « Dofus switcher chargé » doit s'afficher. ✅
+Then click the **Hammerspoon** icon in the menu bar, then **Reload Config**.
+The message "Dofus switcher chargé" should appear. ✅
 
 ---
 
-## Configuration (optionnel)
+## Configuration (optional)
 
-Ouvre `~/.hammerspoon/init.lua` avec un éditeur de texte. Dans le Finder, `Cmd + Shift + G` puis `~/.hammerspoon` permet d'y accéder.
+Open `~/.hammerspoon/init.lua` in a text editor. In Finder, `Cmd + Shift + G` then `~/.hammerspoon` takes you there.
 
-### Définir l'ordre de tes personnages
+### Set your characters' order
 
-Par défaut, les fenêtres sont triées dans leur ordre d'ouverture. Pour forcer un ordre, par exemple ton ordre d'initiative, remplis la liste `ORDRE` avec les noms de tes persos tels qu'ils apparaissent dans le titre des fenêtres :
+By default, windows are sorted by the order they were opened. To force an order (e.g. your initiative order), fill the `ORDRE` list with your characters' names as they appear in the window titles:
 
 ```lua
 local ORDRE = {
-  "MonIop",
-  "MonEni",
-  "MonCra",
+  "MyIop",
+  "MyEni",
+  "MyCra",
 }
 ```
 
-### Si aucune fenêtre n'est détectée
+### If no window is detected
 
-1. Appuie sur `⌥ Option` + `D` : la console liste toutes les fenêtres ouvertes au format `NomDeLApp | Titre`.
-2. Repère le nom exact de l'application Dofus Retro.
-3. Mets-le dans la variable `MATCH` :
+1. Press `⌥ Option` + `D`: the console lists all open windows as `AppName | Title`.
+2. Find the exact name of the Dofus Retro app.
+3. Put it in the `MATCH` variable:
 
 ```lua
 local MATCH = "Dofus"
 ```
 
-### Changer les raccourcis
+### Change the shortcuts
 
-Remplace `{"alt"}` par `{"ctrl"}`, `{"cmd"}` ou une combinaison comme `{"ctrl", "alt"}`. Évite `cmd` + `tab`, déjà utilisé par macOS.
+Replace `{"alt"}` with `{"ctrl"}`, `{"cmd"}` or a combination like `{"ctrl", "alt"}`. Avoid `cmd` + `tab`, which macOS already uses.
 
-Après chaque modification, fais **Reload Config**.
-
----
-
-## Conseils
-
-- **Joue en mode fenêtré**, pas en plein écran. En plein écran, macOS place chaque fenêtre dans un Space séparé, ce qui rend le changement lent ou instable.
-- Le script se contente de changer de fenêtre : une touche = un changement, comme les organizers Windows. Il n'automatise aucune action en jeu.
+After any change, click **Reload Config**.
 
 ---
 
-## Crédits
+## Tips
 
-Créé par **Thelemas** – [github.com/Thelemas/DofusRetroSwitcherMac](https://github.com/Thelemas/DofusRetroSwitcherMac)
+- **Play in windowed mode**, not fullscreen. In fullscreen, macOS puts each window in a separate Space, which makes switching slow or unreliable.
+- The script only switches windows (one keypress = one switch, like Windows organizers). It does not automate any in-game action.
 
-Si tu réutilises ou modifies ce script, merci de conserver la mention d'auteur et de créditer ce repo. 🙂
+---
 
-## 📄 Licence
+## Credits
 
-Distribué sous licence [MIT](LICENSE).
+Created by **Thelemas** – [github.com/Thelemas/DofusRetroSwitcherMac](https://github.com/Thelemas/DofusRetroSwitcherMac)
+
+If you reuse or modify this script, please keep the author notice and credit this repo. 🙂
+
+## 📄 License
+
+Released under the [MIT](LICENSE) license.
