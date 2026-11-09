@@ -131,4 +131,4 @@ If you reuse or modify this script, please keep the author notice and credit thi
 
 ## 📄 License
 
-Released under the [MIT](LICENSE) license.
+Released under the [GPL-3.0](LICENSE) license
