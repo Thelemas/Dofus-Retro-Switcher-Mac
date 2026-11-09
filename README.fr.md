@@ -130,4 +130,4 @@ Si tu réutilises ou modifies ce script, merci de conserver la mention d'auteur 
 
 ## 📄 Licence
 
-Distribué sous licence [MIT](LICENSE).
+Released under the [GPL-3.0](LICENSE) license
