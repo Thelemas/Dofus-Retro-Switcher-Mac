@@ -70,7 +70,7 @@ In Terminal:
 
 ```bash
 mkdir -p ~/.hammerspoon
-curl -o ~/.hammerspoon/init.lua https://raw.githubusercontent.com/Thelemas/DofusRetroSwitcherMac/main/DofusRetroSwitcherMac.lua
+curl -L -o ~/.hammerspoon/init.lua https://github.com/Thelemas/DofusRetroSwitcherMac/releases/latest/download/DofusRetroSwitcherMac.lua
 ```
 
 > The `DofusRetroSwitcherMac.lua` script is saved as `init.lua`, the only file Hammerspoon loads at startup.
