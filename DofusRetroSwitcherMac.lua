@@ -1,7 +1,7 @@
 -- =========================================================
 --  Dofus Retro Switcher pour macOS (Hammerspoon)
---  Auteur : Tim Douyou - https://github.com/tonpseudo/dofus-retro-switcher-mac
---  Licence MIT - Merci de conserver cette mention en cas de réutilisation.
+--  Auteur : Thelemas - https://github.com/Thelemas/DofusRetroSwitcherMac
+--  Licence GPL-3.0 - Merci de conserver cette mention en cas de réutilisation.
 -- =========================================================-- =========================================================
 --  Dofus Retro - Switcher de comptes pour macOS (Hammerspoon)
 -- =========================================================
